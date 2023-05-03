@@ -11,3 +11,7 @@ These results have been / will be publicly presented at:
 - "Ecofocus" at Gold Creek Station, 15-09-2022
 - "Science at the Sanctuary" at Wildbark, 06-10-2022
 - ESA-SCOB 2022 Conference at Wollongong, 28-11-2022
+
+MARCH 2023 UPDATE
+Manscript submitted for peer review to Ecological Management and Restoration. Current ms draft PDF here is the version submitted
+
