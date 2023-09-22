@@ -567,12 +567,13 @@ ir.fig <- ir.pred %>%
   mutate(low = if_else(low < 0, 0, low),
          up = if_else(up >5, 5, up))%>%
   
-  ggplot(aes(y=Area))+
+  ggplot(aes(y=Area, shape=PCT.STATE2))+
   scale_y_discrete(labels = c( "Offsets", "Goorooyarroo", "Mulligans Flat"))+
   
   geom_pointrange(aes(x=resp, xmin=low, xmax=up, colour = PCT.STATE2),
                   position=position_dodge(width=0.3)) +
-  
+  scale_shape_manual(values = c(15,16,17))+
+  scale_colour_brewer(palette = "Dark2")+
   theme_bw()+xlab("Indicator group richness")+
   theme(axis.text.x = element_text(colour = "black"),
         axis.text.y = element_text(colour = "black"),
@@ -624,13 +625,14 @@ sr.fig <- sr.pred %>%
   mutate(low = if_else(low < 0, 0, low),
          up = if_else(up >13, 13, up))%>%
   
-  ggplot(aes(y=Area))+
+  ggplot(aes(y=Area, shape=PCT.STATE2))+
   scale_y_discrete(labels = c( "Offsets", "Goorooyarroo", "Mulligans Flat"))+
   
   geom_pointrange(aes(x=resp, xmin=low, xmax=up, colour = PCT.STATE2),
                   position=position_dodge(width=0.4)) +
-  
-  theme_bw()+xlab("Target species richness")+
+  scale_shape_manual(values = c(15,16,17))+
+  scale_colour_brewer(palette = "Dark2")+
+  theme_bw()+xlab("Indicator species richness")+
   theme(axis.text.x = element_text(colour = "black"),
         axis.text.y = element_text(colour = "black"),
         legend.position = "none",
@@ -680,14 +682,15 @@ ma.fig <- ma.pred %>%
   mutate(low = if_else(low < 0, 0, low),
          up = if_else(up >4, 4, up))%>%
   
-  ggplot(aes(y=Area))+
+  ggplot(aes(y=Area, shape=PCT.STATE2))+
   scale_y_discrete(labels = c( "Offsets", "Goorooyarroo", "Mulligans Flat"))+
   
   geom_pointrange(aes(x=resp, xmin=low, xmax=up, colour = PCT.STATE2),
                   position=position_dodge(width=0.4)) +
   scale_x_continuous(limits = c(0,NA),
                      labels = c("0", "1 \n1-9", "2 \n10-99", "3 \n100-999"))+
-  
+  scale_shape_manual(values = c(15,16,17))+
+  scale_colour_brewer(palette = "Dark2")+
   theme_bw()+xlab("Highest indicator abundance score")+
   theme(axis.text.x = element_text(colour = "black"),
         axis.text.y = element_text(colour = "black"),
@@ -738,12 +741,13 @@ sa.fig <- sa.pred %>%
   mutate(low = if_else(low < 0, 0, low),
          up = if_else(up >13, 13, up))%>%
   
-  ggplot(aes(y=Area))+
+  ggplot(aes(y=Area, shape=PCT.STATE2))+
   scale_y_discrete(labels = c( "Offsets", "Goorooyarroo", "Mulligans Flat"))+
   
   geom_pointrange(aes(x=resp, xmin=low, xmax=up, colour = PCT.STATE2),
                   position=position_dodge(width=0.4)) +
-  
+  scale_shape_manual(values = c(15,16,17))+
+  scale_colour_brewer(palette = "Dark2")+
   theme_bw()+xlab("Sum of indicator abundance scores")+
   theme(axis.text.x = element_text(colour = "black"),
         axis.text.y = element_text(colour = "black"),
@@ -794,15 +798,16 @@ ll.fig <- ll.pred %>%
   mutate(low = if_else(low < 0, 0, low),
          up = if_else(up >4, 4, up))%>%
   
-  ggplot(aes(y=Area))+
+  ggplot(aes(y=Area,shape=PCT.STATE2))+
   scale_y_discrete(labels = c( "Offsets", "Goorooyarroo", "Mulligans Flat"))+
   
   geom_pointrange(aes(x=resp, xmin=low, xmax=up, colour = PCT.STATE2),
                   position=position_dodge(width=0.4)) +
   scale_x_continuous(limits = c(0,NA),
                      labels = c("0", "1 \n1-9", "2 \n10-99", "3 \n100-999",  "4 \n1000+"))+
-  
-  theme_bw()+xlab("Lilies indicator abundance score")+
+  scale_shape_manual(values = c(15,16,17))+
+  scale_colour_brewer(palette = "Dark2")+
+  theme_bw()+xlab("Lilies group abundance score")+
   theme(axis.text.x = element_text(colour = "black"),
         axis.text.y = element_text(colour = "black"),
         legend.position = "none",
@@ -858,8 +863,8 @@ dC.fig <- dC.pred %>%
   geom_pointrange(aes(x=resp, xmin=low, xmax=up)) +
   scale_x_continuous(limits = c(0,NA),
                      labels = c("0", "1 \n1-9", "2 \n10-99", "3 \n100-999"))+
-  
-  theme_bw()+xlab("Daisies (control) indicator abundance score")+
+
+  theme_bw()+xlab("Control species group abundance score")+
   theme(axis.text.x = element_text(colour = "black"),
         axis.text.y = element_text(colour = "black"),
         legend.position = "none",
@@ -1435,14 +1440,14 @@ dC2.pred$low <- (dC2.pred$resp-(1.96 * dC2.pred$SE))
 Q2.pred <- rbind(ir2.pred, sr2.pred, ma2.pred, sa2.pred,
                  ll2.pred, or2.pred, dT2.pred, dC2.pred)
 #new facet labels
-new_labels <- c("A" = "Indicator richness",
-                "B" = "Target species richness", 
-                "C" = "Highest indicator abundance score",
-                "D" = "Sum of indicator abundance scores",
-                "E" = "Lilies indicator abundance score",
-                "F" = "Orchids indicator abundance score",
-                "G" = "Daisies (tuberous) indicator abundance score",
-                "H" = "Daisies (control) indicator abundance score")
+new_labels <- c("A" = "A. Indicator group richness",
+                "B" = "B. Indicator species richness", 
+                "C" = "C. Highest indicator abundance score",
+                "D" = "D. Sum of indicator abundance scores",
+                "E" = "E. Lilies group abundance score",
+                "F" = "F. Orchids group abundance score",
+                "G" = "G. Tuberous daisies group abundance score",
+                "H" = "H. Control species group abundance score")
 
 Q2.FIG <- Q2.pred %>% 
   mutate(Area = ifelse(Area=="OFF", "Offsets",
@@ -1458,17 +1463,19 @@ Q2.FIG <- Q2.pred %>%
   facet_wrap(~order, labeller = labeller(order = new_labels), scales = "free_y", ncol = 2)+
   #scale_y_discrete(labels = c( "Offsets", "Goorooyarroo", "Mulligans Flat"))+
   
-  theme_bw()+xlab("PC1")+ylab("Predicted reponse")+labs(fill = "MFWS Area", colour = "MFWS Area")+
+  theme_bw()+xlab("PC1"
+                  )+ylab("Predicted reponse")+labs(fill = "Sanctuary \nArea", colour = "Sanctuary \nArea")+
   theme(axis.text.x = element_text(colour = "black"),
         axis.text.y = element_text(colour = "black"),
         axis.title = element_text(face = "bold"),
-        legend.title = element_text(face = "bold"))
+        legend.title = element_text(face = "bold"),
+        strip.text = element_text(face = "bold", hjust = 0))
 
 Q2.FIG
 
 ggsave("Q2-Figure.tiff",
        plot=Q2.FIG,
-       width = 7.5, height = 5.0, units = "in",
+       width = 7.5, height = 7.5, units = "in",
        dpi = 300)  
 
 # 5. QUESTION 3__________________________________####
@@ -1652,7 +1659,7 @@ ir3.fig <- ir3.pred %>%
   
   ggplot(aes(y=Exp.Treat))+
   geom_vline(xintercept = 2, linetype = "dashed", size = 1, color = "black")+
-  scale_y_discrete(labels = c( "High Grazing", "Bettong Fence \n(Floppy Top)", "Bettong Fence \n(High Grazing)", "Bettong Fence \n(Low Grazing)", "Low Grazing"))+
+  scale_y_discrete(labels = c( "High Grazing", "Extra Fence \n(Floppy Top)", "Extra Fence \n(High Grazing)", "Extra Fence \n(Low Grazing)", "Low Grazing"))+
   geom_jitter(data = datMULL, aes(x=INDI.RICH), colour = "#619CFF", size = 2, height = 0.1, width = 0.1)+
   geom_pointrange(aes(x=resp, xmin=low, xmax=up), size = 1) +
   
@@ -1693,7 +1700,7 @@ sr3.fig <- sr3.pred %>%
   
   ggplot(aes(y=Exp.Treat))+
   geom_vline(xintercept = 2.416667, linetype = "dashed", size = 1, color = "black")+
-  scale_y_discrete(labels = c( "High Grazing", "Bettong Fence \n(Floppy Top)", "Bettong Fence \n(High Grazing)", "Bettong Fence \n(Low Grazing)", "Low Grazing"))+
+  scale_y_discrete(labels = c( "High Grazing", "Extra Fence \n(Floppy Top)", "Extra Fence \n(High Grazing)", "Extra Fence \n(Low Grazing)", "Low Grazing"))+
   geom_jitter(data = datMULL, aes(x=SPP.RICH), colour = "#619CFF", size = 2, height = 0.1, width = 0.1)+
   geom_pointrange(aes(x=resp, xmin=low, xmax=up), size = 1) +
   
@@ -1734,7 +1741,7 @@ ma3.fig <- ma3.pred %>%
   
   ggplot(aes(y=Exp.Treat))+
   geom_vline(xintercept = 2, linetype = "dashed", size = 1, color = "black")+
-  scale_y_discrete(labels = c( "High Grazing", "Bettong Fence \n(Floppy Top)", "Bettong Fence \n(High Grazing)", "Bettong Fence \n(Low Grazing)", "Low Grazing"))+
+  scale_y_discrete(labels = c( "High Grazing", "Extra Fence \n(Floppy Top)", "Extra Fence \n(High Grazing)", "Extra Fence \n(Low Grazing)", "Low Grazing"))+
   geom_jitter(data = datMULL, aes(x=MAX.ABUND), colour = "#619CFF", size = 2, height = 0.1, width = 0.1)+
   geom_pointrange(aes(x=resp, xmin=low, xmax=up), size = 1) +
   scale_x_continuous(limits = c(0,NA),
@@ -1778,7 +1785,7 @@ or3.fig <- or3.pred %>%
   
   ggplot(aes(y=Exp.Treat))+
   geom_vline(xintercept =  1.7499999, linetype = "dashed", size = 1, color = "black")+
-  scale_y_discrete(labels = c( "High Grazing", "Bettong Fence \n(Floppy Top)", "Bettong Fence \n(High Grazing)", "Bettong Fence \n(Low Grazing)", "Low Grazing"))+
+  scale_y_discrete(labels = c( "High Grazing", "Extra Fence \n(Floppy Top)", "Extra Fence \n(High Grazing)", "Extra Fence \n(Low Grazing)", "Low Grazing"))+
   geom_jitter(data = datMULL, aes(x=Orchids), colour = "#619CFF", size = 2, height = 0.1, width = 0.1)+
   geom_pointrange(aes(x=resp, xmin=low, xmax=up), size = 1) +
   scale_x_continuous(limits = c(0,NA),
