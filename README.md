@@ -15,3 +15,6 @@ These results have been / will be publicly presented at:
 MARCH 2023 UPDATE
 Manscript submitted for peer review to Ecological Management and Restoration. Current ms draft PDF here is the version submitted
 
+OCTOBER 2023 UPDATE
+Revised manuscript resubmitted to Ecological Management and Restoration following overwhelmingly positive reviewers. Three reviewers agreed our manuscript was already well-written, the study well-designed and robust, the analysis clear, and the conclusions sound and based on convincing evidence. Only comments were really that some of the contextual information around our study and management conclusions were underdeveloped, and so we have happily provided the requested detail in this revised version (see the "NgaludaImpacts-EMR-Revision.pdf" for current revised version)
+
